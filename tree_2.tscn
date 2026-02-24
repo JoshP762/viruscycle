@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bheiqjfgjqv7a"]
+
+[ext_resource type="Texture2D" uid="uid://dbf3hh0e8e64j" path="res://monolith_three.png" id="1_1m8y5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.7162962, 0.7162962, 0.7162962, 1)
+albedo_texture = ExtResource("1_1m8y5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_w48qg"]
+material = SubResource("StandardMaterial3D_ycdy4")
+
+[node name="tree2" type="Node3D"]
+transform = Transform3D(1.56, 0, 0, 0, 1.56, 0, 0, 0, 1.56, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5517519, 0, 0, 0, 2.5517519, 0, 0, 0, 2.5517519, 0, 0, 0)
+mesh = SubResource("QuadMesh_w48qg")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.11540615e-07, 0, 2.5517519, 0, 2.5517519, 0, -2.5517519, 0, -1.11540615e-07, -0.0029976368, 0.004799843, 0.07262564)
+mesh = SubResource("QuadMesh_w48qg")
+skeleton = NodePath("../..")
