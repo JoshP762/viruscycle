@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsrsb5mtt88da"]
+
+[ext_resource type="Script" uid="uid://biystqulg150k" path="res://turret.gd" id="1_3oylf"]
+[ext_resource type="PackedScene" uid="uid://c1dexnmaygs6s" path="res://bullet.tscn" id="2_c5apd"]
+[ext_resource type="ArrayMesh" uid="uid://x4axr6pmwamq" path="res://TURRET.obj" id="2_tjdg3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5apd"]
+shading_mode = 0
+albedo_color = Color(5.2943824e-07, 0.7315164, 0.42508888, 1)
+
+[node name="Turret" type="Node3D"]
+script = ExtResource("1_3oylf")
+bullet_scene = ExtResource("2_c5apd")
+bullet_spawn = NodePath("Marker3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.090387575, 0, 0, 0, 0.090387575, 0, 0, 0, 0.090387575, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_c5apd")
+mesh = ExtResource("2_tjdg3")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.493437, 0)

@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var trail_color: Color = Color(0.0, 0.8, 1.0, 1.0)
-@export var trail_height: float = 1.2
+@export var trail_color: Color = Color("bf7fbf")
+@export var trail_height: float = 1.0
 @export var min_point_distance: float = 0.15
 @export var max_points: int = 400
 @export var action: String = "ui_select"
