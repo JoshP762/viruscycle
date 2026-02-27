@@ -18,13 +18,15 @@ enum ForwardAxis { NEG_Z, POS_Z, NEG_X, POS_X }
 @export var max_pitch_deg: float = 6.0
 @export var pitch_speed: float = 5.0
 
-@export var airborne_pitch_x: float = 0.0
-@export var airborne_pitch_y: float = 0.0
-@export var airborne_pitch_z: float = 0.0
+@export var airborne_pitch_x: float = -5.0
+@export var airborne_pitch_y: float = 5.0
+@export var airborne_pitch_z: float = 5.0
 
 @export var alignment_speed: float = 8.0
 
 var _actual_mesh_child: Node3D
+
+
 
 @export_group("Suspension")
 @export var landing_bounce_intensity: float = 5
@@ -41,6 +43,7 @@ signal player_died
 @export_group("Trail")
 @export var trail_damage: int = 999
 @export var trail_height: float = 1.0
+@export var trail_lifetime: float = 6.0  # NEW
 # --- END NEW ---
 
 var _was_airborne: bool = false
@@ -48,6 +51,7 @@ var _was_airborne: bool = false
 var _current_trail: MeshInstance3D
 var _current_points: Array[Vector3] = []
 var _trail_segments: Array[Area3D] = []  # NEW
+var _trail_timers: Array[float] = []  # NEW
 var _max_trail_points: int = 400
 var _trail_active: bool = false
 
@@ -58,6 +62,7 @@ var _current_pitch: float = 0.0
 var _prev_speed: float = 0.0
 
 func _ready() -> void:
+	add_to_group("player")
 	if mesh_node:
 		_mesh = get_node(mesh_node)
 		if _mesh.get_child_count() > 0:
@@ -87,6 +92,7 @@ func _apply_landing_bounce(impact_vel: float) -> void:
 		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func _physics_process(delta: float) -> void:
+	_tick_trail_lifetimes(delta)
 	var vertical_vel_at_impact = velocity.y
 	
 	if is_on_floor() and _was_airborne:
@@ -173,6 +179,30 @@ func _apply_lean_and_surface_align(delta: float) -> void:
 		full_target_basis, 
 		alignment_speed * delta
 	).orthonormalized()
+	
+func _tick_trail_lifetimes(delta: float) -> void:
+	var i := 0
+	while i < _trail_timers.size():
+		_trail_timers[i] -= delta
+		if _trail_timers[i] <= 0.0:
+			if i < _trail_segments.size() and is_instance_valid(_trail_segments[i]):
+				_trail_segments[i].queue_free()
+			_trail_segments.remove_at(i)
+			_trail_timers.remove_at(i)
+			if i < _current_points.size():
+				_current_points.remove_at(i)
+		else:
+			i += 1
+	# Rebuild mesh to reflect removed points
+	if is_instance_valid(_current_trail) and _current_trail.mesh:
+		var mesh := _current_trail.mesh as ImmediateMesh
+		mesh.clear_surfaces()
+		if _current_points.size() >= 2:
+			mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+			for point in _current_points:
+				mesh.surface_add_vertex(point)
+				mesh.surface_add_vertex(point + Vector3.UP * 1.0)
+			mesh.surface_end()
 
 
 func _start_new_trail():
@@ -204,6 +234,7 @@ func _clear_trail_segments() -> void:
 		if is_instance_valid(seg):
 			seg.queue_free()
 	_trail_segments.clear()
+	_trail_timers.clear() 
 
 
 # NEW: spawns a collision box between two trail points
@@ -233,6 +264,7 @@ func _add_trail_segment(from: Vector3, to: Vector3) -> void:
 
 	area.body_entered.connect(_on_trail_hit)
 	_trail_segments.append(area)
+	_trail_timers.append(trail_lifetime)  # NEW
 
 
 # NEW: called when something enters a trail segment

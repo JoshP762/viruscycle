@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cru81cft5hs1d"]
+
+[ext_resource type="Script" uid="uid://cfl0rpu1srn3s" path="res://missileturret.gd" id="1_sdimf"]
+[ext_resource type="PackedScene" uid="uid://bx088r5pijflk" path="res://missile.tscn" id="2_6lvdh"]
+[ext_resource type="ArrayMesh" uid="uid://cbfslv23v15lg" path="res://missileturretv1.obj" id="2_ba3fw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ba3fw"]
+albedo_color = Color(0.7268371, 0.16352934, 0.32346112, 1)
+metallic = 0.79
+roughness = 0.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sdimf"]
+
+[node name="Node3D" type="StaticBody3D"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_sdimf")
+missile_scene = ExtResource("2_6lvdh")
+fire_rate = 1.0
+detection_radius = 10.0
+missile_spawn = NodePath("Marker3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ba3fw")
+mesh = ExtResource("2_ba3fw")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7344217, 12.030907, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(13.04, 0, 0, 0, 13.04, 0, 0, 0, 13.04, 0, 7.453599, 0)
+shape = SubResource("CapsuleShape3D_sdimf")

@@ -1,12 +1,12 @@
-extends Node3D
+extends StaticBody3D
 
-@export var bullet_scene: PackedScene
-@export var fire_rate: float = 0.1
-@export var detection_radius: float = 20.0
-@export var bullet_spawn: NodePath
+@export var missile_scene: PackedScene
+@export var fire_rate: float = 3.0        # Missiles are slow and menacing
+@export var detection_radius: float = 40.0  # Detects from further away
+@export var missile_spawn: NodePath
 
 @export_group("Health")
-@export var max_health: int = 30
+@export var max_health: int = 50
 var health: int = max_health
 
 var _player: Node3D = null
@@ -28,8 +28,8 @@ func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
 
-	if bullet_spawn:
-		_spawn_node = get_node(bullet_spawn)
+	if missile_spawn:
+		_spawn_node = get_node(missile_spawn)
 
 
 func take_damage(amount: int) -> void:
@@ -43,8 +43,6 @@ func take_damage(amount: int) -> void:
 
 func _die() -> void:
 	_dead = true
-	# Simple death — just remove the turret
-	# Swap queue_free for an explosion effect later
 	queue_free()
 
 
@@ -62,25 +60,23 @@ func _process(delta: float) -> void:
 	if _dead or not is_instance_valid(_player):
 		return
 
+	# Face player
 	var target := _player.global_position
 	target.y = global_position.y
 	look_at(target, Vector3.UP)
+	rotate_y(deg_to_rad(90))
 
 	_fire_timer -= delta
 	if _fire_timer <= 0.0:
 		_fire_timer = fire_rate
 		_shoot()
-		
-
 
 
 func _shoot() -> void:
-	if not bullet_scene:
+	if not missile_scene:
 		return
 	var spawn := _spawn_node if is_instance_valid(_spawn_node) else self
-	var bullet := bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
-	bullet.global_position = spawn.global_position
-	var dir := (_player.global_position - spawn.global_position).normalized()
-	bullet.setup(dir)
-	
+	var missile := missile_scene.instantiate()
+	get_tree().current_scene.add_child(missile)
+	missile.global_position = spawn.global_position
+	missile.setup(_player)

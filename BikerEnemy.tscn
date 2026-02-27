@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo2yx355xeuwy"]
+
+[ext_resource type="Script" uid="uid://dwbnt3oneo4a3" path="res://biker_enemy.gd" id="1_vkfw4"]
+[ext_resource type="ArrayMesh" uid="uid://d07qvyjrepcrx" path="res://EnemyStrider v2.obj" id="2_vkfw4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efwxw"]
+albedo_color = Color(0.797737, 0.00010032855, 0.12905699, 1)
+metallic = 0.57
+roughness = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efwxw"]
+height = 3.6307373
+
+[node name="BikerEnemy" type="CharacterBody3D"]
+collision_layer = 8
+script = ExtResource("1_vkfw4")
+speed = 100.0
+intercept_distance = 20.0
+hold_distance = 10.0
+trail_color = Color(0.711259, 0.33851445, 1, 1)
+trail_lifetime = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_efwxw")
+mesh = ExtResource("2_vkfw4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.21136475, 0.52435935, 0)
+shape = SubResource("CapsuleShape3D_efwxw")
