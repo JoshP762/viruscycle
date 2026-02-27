@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsrsb5mtt88da"]
+[gd_scene load_steps=6 format=3 uid="uid://dsrsb5mtt88da"]
 
 [ext_resource type="Script" uid="uid://biystqulg150k" path="res://turret.gd" id="1_3oylf"]
 [ext_resource type="PackedScene" uid="uid://c1dexnmaygs6s" path="res://bullet.tscn" id="2_c5apd"]
@@ -8,9 +8,16 @@
 shading_mode = 0
 albedo_color = Color(5.2943824e-07, 0.7315164, 0.42508888, 1)
 
-[node name="Turret" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c5apd"]
+
+[node name="Turret" type="StaticBody3D"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_3oylf")
 bullet_scene = ExtResource("2_c5apd")
+fire_rate = 0.05
+detection_radius = 3000.0
 bullet_spawn = NodePath("Marker3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -19,4 +26,8 @@ material_override = SubResource("StandardMaterial3D_c5apd")
 mesh = ExtResource("2_tjdg3")
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.493437, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9847851, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.60179603, 0)
+shape = SubResource("CapsuleShape3D_c5apd")
