@@ -5,6 +5,8 @@ extends Node3D
 @export var detection_radius: float = 20.0
 @export var bullet_spawn: NodePath
 
+signal died
+
 @export_group("Health")
 @export var max_health: int = 30
 var health: int = max_health
@@ -43,6 +45,10 @@ func take_damage(amount: int) -> void:
 
 func _die() -> void:
 	_dead = true
+	var sfx := $AudioStreamPlayer3D
+	sfx.play()
+	await sfx.finished
+	died.emit() 
 	# Simple death — just remove the turret
 	# Swap queue_free for an explosion effect later
 	queue_free()

@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/AmbientDriving.mp3-e9050549f48965869bb6f60bbb
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

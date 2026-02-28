@@ -1,12 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy5pyriemtmd7"]
+[gd_scene load_steps=5 format=3 uid="uid://cy5pyriemtmd7"]
 
 [ext_resource type="Script" uid="uid://cen4bna2pc7xi" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://cl4momhom1gba" path="res://start.png" id="2_jix8l"]
+[ext_resource type="Texture2D" uid="uid://cg41puk5a331f" path="res://credits.png" id="3_glbon"]
+[ext_resource type="Texture2D" uid="uid://dpijjgadmgk0r" path="res://exit.png" id="4_nlkkf"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
@@ -28,16 +33,53 @@ grow_vertical = 2
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-text = "START"
+icon = ExtResource("2_jix8l")
+flat = true
+icon_alignment = 1
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = 178.0
+offset_right = 290.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Options" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-text = "OPTIONS"
+icon = ExtResource("3_glbon")
+flat = true
+icon_alignment = 1
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-text = "QUIT"
+icon = ExtResource("4_nlkkf")
+flat = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -622.0
+offset_top = -517.0
+offset_right = 623.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 311
+text = "STRID3R"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]

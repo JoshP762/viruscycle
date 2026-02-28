@@ -5,6 +5,8 @@ extends StaticBody3D
 @export var detection_radius: float = 40.0  # Detects from further away
 @export var missile_spawn: NodePath
 
+signal died
+
 @export_group("Health")
 @export var max_health: int = 50
 var health: int = max_health
@@ -43,6 +45,10 @@ func take_damage(amount: int) -> void:
 
 func _die() -> void:
 	_dead = true
+	var sfx := $AudioStreamPlayer3D
+	sfx.play()
+	await sfx.finished
+	died.emit()  # add this
 	queue_free()
 
 
