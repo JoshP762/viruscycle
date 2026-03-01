@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy5pyriemtmd7"]
+[gd_scene load_steps=10 format=3 uid="uid://cy5pyriemtmd7"]
 
 [ext_resource type="Script" uid="uid://cen4bna2pc7xi" path="res://main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://cl4momhom1gba" path="res://start.png" id="2_jix8l"]
-[ext_resource type="Texture2D" uid="uid://cg41puk5a331f" path="res://credits.png" id="3_glbon"]
-[ext_resource type="Texture2D" uid="uid://dpijjgadmgk0r" path="res://exit.png" id="4_nlkkf"]
+[ext_resource type="AudioStream" uid="uid://byas4mh7iyiym" path="res://startup(1).MP3" id="3_dy7ct"]
+[ext_resource type="VideoStream" uid="uid://cg2n1bxp2u50t" path="res://peakkkkkkkkkk.ogv" id="4_dy7ct"]
+[ext_resource type="Texture2D" uid="uid://dmvee3d0ke04e" path="res://moto_gp_bike/start2.png" id="4_qe12f"]
+[ext_resource type="Texture2D" uid="uid://b208nwcwjmfby" path="res://moto_gp_bike/credits2.png" id="5_8qtwp"]
+[ext_resource type="Script" uid="uid://cei8v3pqssho5" path="res://buttonhue.gd" id="6_8qtwp"]
+[ext_resource type="Texture2D" uid="uid://brcxm4fu1ghyu" path="res://moto_gp_bike/exit2.png" id="6_dy7ct"]
+[ext_resource type="AudioStream" uid="uid://bsa7e2tr1tmh0" path="res://Toilet Menu Song.wav" id="6_nlkkf"]
+[ext_resource type="Texture2D" uid="uid://cb52c2qlsnywm" path="res://logoS3R.png" id="7_8qtwp"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -15,71 +20,84 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
+menu_music = ExtResource("6_nlkkf")
+start_sound = ExtResource("3_dy7ct")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_dy7ct")
+expand = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -55.7
+offset_top = 23.045
+offset_right = 1864.3
+offset_bottom = 1103.045
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("7_8qtwp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -691.0
-offset_top = -68.0
-offset_right = 691.0
-offset_bottom = 612.0
+anchor_bottom = 1.0
+offset_left = -1236.0
+offset_top = -506.0
+offset_right = 146.0
+offset_bottom = 174.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-icon = ExtResource("2_jix8l")
+icon = ExtResource("4_qe12f")
 flat = true
 icon_alignment = 1
+script = ExtResource("6_8qtwp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -286.0
-offset_top = 178.0
-offset_right = 290.0
-offset_bottom = 326.0
+anchor_bottom = 1.0
+offset_left = -795.0
+offset_top = -283.0
+offset_right = -219.0
+offset_bottom = -135.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="Options" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-icon = ExtResource("3_glbon")
+icon = ExtResource("5_8qtwp")
 flat = true
 icon_alignment = 1
+script = ExtResource("6_8qtwp")
 
 [node name="Quit" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 71
-icon = ExtResource("4_nlkkf")
+icon = ExtResource("6_dy7ct")
 flat = true
+script = ExtResource("6_8qtwp")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -622.0
-offset_top = -517.0
-offset_right = 623.0
-offset_bottom = -92.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 311
-text = "STRID3R"
-horizontal_alignment = 1
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_nlkkf")
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="HBoxContainer/Options" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

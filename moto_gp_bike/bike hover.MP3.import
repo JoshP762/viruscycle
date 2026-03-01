@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7in1nldevb8o"
+path="res://.godot/imported/bike hover.MP3-87af996c8926f2af41709ae2ef8acd06.mp3str"
+
+[deps]
+
+source_file="res://moto_gp_bike/bike hover.MP3"
+dest_files=["res://.godot/imported/bike hover.MP3-87af996c8926f2af41709ae2ef8acd06.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

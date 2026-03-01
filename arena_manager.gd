@@ -8,6 +8,9 @@ extends Node3D
 @export var key_spawn: NodePath  # Point the key appears at — use a Marker3D
 @export var enemies: Array[NodePath] = []
 
+var _cleared: bool = false
+
+
 signal arena_cleared
 
 var _enemy_nodes: Array[Node3D] = []
@@ -15,21 +18,32 @@ var _alive: int = 0
 
 
 func _ready() -> void:
+	print("----- ARENA START -----")
 	for path in enemies:
-		var e := get_node(path)
-		if is_instance_valid(e):
+		print("Checking path:", path)
+		var e := get_node_or_null(path)
+		if e == null:
+			print("FAILED to find:", path)
+		else:
+			print("Found:", e.name)
 			_enemy_nodes.append(e)
 			_alive += 1
-			# Connect to whatever signal the enemy emits on death
 			if e.has_signal("died"):
 				e.died.connect(_on_enemy_died)
 
+	print("TOTAL COUNTED:", _alive)
+
 
 func _on_enemy_died() -> void:
-	_alive -= 1
-	if _alive <= 0:
-		_spawn_key()
+	if _cleared:
+		return
 
+	_alive -= 1
+	print("Enemy died. Remaining:", _alive)
+
+	if _alive <= 0:
+		_cleared = true
+		_spawn_key()
 
 func _spawn_key() -> void:
 	arena_cleared.emit()  

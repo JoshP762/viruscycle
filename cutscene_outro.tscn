@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnewpoiq5as3e"]
+
+[ext_resource type="Script" uid="uid://bllni0lhr7jfh" path="res://endingcutscene.gd" id="1_lxano"]
+[ext_resource type="AudioStream" uid="uid://brtyhb6y17xmp" path="res://Sax Outro Song.wav" id="2_apxrn"]
+[ext_resource type="Texture2D" uid="uid://coaus85p422tk" path="res://Screenshot_2026-02-28_022750.png" id="2_mjl7a"]
+
+[node name="CutsceneOutro" type="Node"]
+script = ExtResource("1_lxano")
+video_player = NodePath("VideoStreamPlayer")
+music = ExtResource("2_apxrn")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+
+[node name="Screenshot20260228022750" type="Sprite2D" parent="."]
+position = Vector2(963, 559)
+texture = ExtResource("2_mjl7a")

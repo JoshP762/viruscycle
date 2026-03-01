@@ -2,24 +2,26 @@ extends CharacterBody3D
 
 @export var player: NodePath
 @export var speed_multiplier: float = 0.85
+@export var detection_radius: float = 40.0
+@export var gravity: float = 24.0
+@export var ground_offset: float = 0.5
 
 @export_group("Health")
 @export var max_health: int = 100
 var health: int = max_health
 
 @export_group("Trail")
-@export var trail_color: Color = Color(1.0, 0.1, 0.1, 1.0)  # Red
+@export var trail_color: Color = Color(1.0, 0.1, 0.1, 1.0)
 @export var trail_height: float = 1.0
 @export var trail_damage: int = 999
 @export var trail_lifetime: float = 5.0
-
-@export var ground_offset: float = 0.5  # Lift above terrain surface
 
 @export_group("SFX")
 @export var death_sound: AudioStream
 
 var _player_node: CharacterBody3D
 var _dead: bool = false
+var _active: bool = false
 
 var _trail_mesh: MeshInstance3D
 var _trail_points: Array[Vector3] = []
@@ -37,6 +39,22 @@ func _ready() -> void:
 	collision_mask = 1
 	_player_node = get_node(player)
 	_setup_trail()
+
+	var area := Area3D.new()
+	area.collision_layer = 0
+	area.collision_mask = 1
+	var shape := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
+	sphere.radius = detection_radius
+	shape.shape = sphere
+	area.add_child(shape)
+	add_child(area)
+	area.body_entered.connect(_on_body_entered)
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		_active = true
 
 
 func _setup_trail() -> void:
@@ -70,6 +88,7 @@ func _die() -> void:
 			seg.queue_free()
 	if is_instance_valid(_trail_mesh):
 		_trail_mesh.queue_free()
+	get_tree().call_group("wave2", "activate")
 	died.emit()
 	if death_sound:
 		var sfx := AudioStreamPlayer3D.new()
@@ -81,36 +100,33 @@ func _die() -> void:
 		sfx.queue_free()
 	queue_free()
 
-func _stick_to_terrain() -> void:
-	var space := get_world_3d().direct_space_state
-	var query := PhysicsRayQueryParameters3D.create(
-		global_position + Vector3.UP * 2.0,
-		global_position + Vector3.DOWN * 10.0
-	)
-	query.exclude = [self]
-	query.collision_mask = 1
-	var result := space.intersect_ray(query)
-	if result:
-		global_position.y = result.position.y + ground_offset
 
 func _physics_process(delta: float) -> void:
-	if _dead or not is_instance_valid(_player_node):
+	if _dead or not _active or not is_instance_valid(_player_node):
 		return
 
-	_stick_to_terrain()
 	_tick_trail_lifetimes(delta)
 
-	var pv := _player_node.velocity
-	global_position.x -= pv.x * speed_multiplier * delta
-	global_position.z -= pv.z * speed_multiplier * delta
+	# Apply gravity like the player
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = -10
 
+	# Mirror player horizontal velocity
+	var pv := _player_node.velocity
+	velocity.x = -pv.x * speed_multiplier
+	velocity.z = -pv.z * speed_multiplier
+
+	move_and_slide()
+
+	# Mirror player rotation
 	var player_basis := _player_node.global_transform.basis
 	global_transform.basis = global_transform.basis.slerp(
 		player_basis.rotated(Vector3.UP, deg_to_rad(180)),
 		10.0 * delta
 	).orthonormalized()
 
-	# Only lay trail when actually moving
 	if Vector2(pv.x, pv.z).length() > 0.5:
 		_update_trail()
 

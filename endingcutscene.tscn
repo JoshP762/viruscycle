@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cciqj6i4tekbi"]
+
+[ext_resource type="Script" uid="uid://bllni0lhr7jfh" path="res://endingcutscene.gd" id="1_55qu4"]
+[ext_resource type="Texture2D" uid="uid://coaus85p422tk" path="res://Screenshot_2026-02-28_022750.png" id="1_jo2ef"]
+
+[node name="CutsceneOutro" type="Node"]
+script = ExtResource("1_55qu4")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+
+[node name="Screenshot20260228022750" type="Sprite2D" parent="."]
+position = Vector2(963, 559)
+texture = ExtResource("1_jo2ef")

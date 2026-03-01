@@ -20,6 +20,7 @@ bullet_scene = ExtResource("2_c5apd")
 fire_rate = 0.05
 detection_radius = 200.0
 bullet_spawn = NodePath("Marker3D")
+max_health = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.090387575, 0, 0, 0, 0.090387575, 0, 0, 0, 0.090387575, 0, 0, 0)

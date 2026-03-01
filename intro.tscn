@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c12oecjtevh1c"]
+
+[node name="Intro" type="Node"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

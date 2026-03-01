@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgby2mvjd2wny"
+path="res://.godot/imported/Toilet Menu Song.wav-f1ff5d1253967b0620a5ae9a86df7830.sample"
+
+[deps]
+
+source_file="res://moto_gp_bike/Toilet Menu Song.wav"
+dest_files=["res://.godot/imported/Toilet Menu Song.wav-f1ff5d1253967b0620a5ae9a86df7830.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

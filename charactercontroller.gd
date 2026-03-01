@@ -26,6 +26,7 @@ enum ForwardAxis { NEG_Z, POS_Z, NEG_X, POS_X }
 
 var _actual_mesh_child: Node3D
 
+#@onready var _music: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
 @export_group("Suspension")

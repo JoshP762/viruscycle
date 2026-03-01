@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfd54ej0283ln"]
+
+[ext_resource type="Script" uid="uid://dauoku5o6pcai" path="res://CutscenePlayer.gd" id="1_c010c"]
+[ext_resource type="AudioStream" uid="uid://coxbhqqnt2w64" path="res://moto_gp_bike/Option 2 Boss Theme.wav" id="2_obgr8"]
+[ext_resource type="VideoStream" uid="uid://bx5t7j77jvtrd" path="res://opening.ogv" id="2_p4fu8"]
+
+[node name="CutsceneIntro" type="Node"]
+script = ExtResource("1_c010c")
+video_player = NodePath("VideoStreamPlayer")
+music = ExtResource("2_obgr8")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_p4fu8")
+expand = true

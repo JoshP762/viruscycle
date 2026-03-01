@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="viruscycle"
-run/main_scene="uid://1pgjh8giw8co"
+run/main_scene="uid://cy5pyriemtmd7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+TransitionManager="*res://transition_manager2.gd"
 
 [display]
 

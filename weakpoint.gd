@@ -4,17 +4,23 @@ extends StaticBody3D
 var health: int = max_health
 @export var death_sound: AudioStream
 
+var _dead: bool = false
+
 signal died
 
 
 func _ready() -> void:
 	health = max_health
 
+
 func take_damage(amount: int) -> void:
+	if _dead:
+		return
 	health -= amount
 	health = clampi(health, 0, max_health)
 	if health <= 0:
-		died.emit()  # Fire immediately so ArenaManager counts it
+		_dead = true
+		died.emit()
 		if death_sound:
 			var sfx := AudioStreamPlayer3D.new()
 			get_tree().current_scene.add_child(sfx)

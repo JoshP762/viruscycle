@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b8qf1uwhhkval"
+path="res://.godot/imported/final arenav2.obj-17792f67ea1ccf94ce3b8946c9317e8f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/final arenav2.obj-17792f67ea1ccf94ce3b8946c9317e8f.mesh"]
+
+source_file="res://moto_gp_bike/final arenav2.obj"
+dest_files=["res://.godot/imported/final arenav2.obj-17792f67ea1ccf94ce3b8946c9317e8f.mesh", "res://.godot/imported/final arenav2.obj-17792f67ea1ccf94ce3b8946c9317e8f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
