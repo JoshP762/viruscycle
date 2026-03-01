@@ -74,7 +74,9 @@ func _process(delta):
 			_target_speed = fast_speed
 	
 	# Smooth acceleration / deceleration
-	_current_speed = lerp(_current_speed, _target_speed, delta * acceleration_rate) 
+	_current_speed = lerp(_current_speed, _target_speed, delta * acceleration_rate)
+
+
 # -----------------------------
 # HEAD MOVEMENT
 # -----------------------------

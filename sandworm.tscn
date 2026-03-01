@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyu15qph1fvui"]
+[gd_scene load_steps=5 format=3 uid="uid://ctpn52lylyi3p"]
 
 [ext_resource type="Script" uid="uid://diods6f006a8u" path="res://sandworm.gd" id="1_rxnhl"]
-[ext_resource type="PackedScene" path="res://segments(1).tscn" id="2_rxnhl"]
+[ext_resource type="PackedScene" uid="uid://de2i1qv76swsv" path="res://segments.tscn" id="2_u6j3f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ok6jj"]
 albedo_color = Color(1, 0.494251, 0.42709014, 1)
@@ -12,16 +12,17 @@ material = SubResource("StandardMaterial3D_ok6jj")
 [node name="Sandworm" type="Node3D"]
 transform = Transform3D(2.865, 0, 0, 0, 2.865, 0, 0, 0, 2.865, 0, 0, 0)
 script = ExtResource("1_rxnhl")
+player_path = NodePath("../CharacterBody3D")
 vertical_amplitude = 100.0
 vertical_frequency = 0.5
 side_amplitude = 50.0
 side_frequency = 1.0
-segment_scene = ExtResource("2_rxnhl")
+segment_scene = ExtResource("2_u6j3f")
 segment_count = 100
 segment_spacing = 2
 turn_speed = 1.5
-slow_speed = 30.0
-fast_speed = 40.0
+slow_speed = 60.0
+fast_speed = 150.0
 slow_duration = 15.0
 fast_duration = 6.0
 
@@ -29,5 +30,4 @@ fast_duration = 6.0
 transform = Transform3D(12.74, 0, 0, 0, 12.74, 0, 0, 0, 12.74, 0, 0, 0)
 mesh = SubResource("SphereMesh_facbu")
 
-[node name="Segments" parent="." instance=ExtResource("2_rxnhl")]
-transform = Transform3D(12.74, 0, 0, 0, 12.74, 0, 0, 0, 12.74, 0, 0, 0)
+[node name="Segments" parent="." instance=ExtResource("2_u6j3f")]
