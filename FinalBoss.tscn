@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo6irwwc7oe2j"]
+
+[ext_resource type="Script" uid="uid://eo6x31pbjjxj" path="res://final_boss.gd" id="1_p1ki0"]
+[ext_resource type="ArrayMesh" uid="uid://btwcdwod88fc2" path="res://SparrowStrid3rdead.obj" id="2_qre5n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u75b4"]
+albedo_color = Color(0.8175312, 0, 0.15137106, 1)
+roughness = 0.26
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xohsi"]
+
+[node name="FinalBoss" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0189459, 0)
+collision_layer = 8
+script = ExtResource("1_p1ki0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_u75b4")
+mesh = ExtResource("2_qre5n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-8.217741e-08, 1.88, 0, -1.88, -8.217741e-08, 0, 0, 0, 1.88, 0.4648077, -0.027226329, 0)
+shape = SubResource("CapsuleShape3D_xohsi")

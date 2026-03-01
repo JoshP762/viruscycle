@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://fowac3v65qjs"]
+
+[ext_resource type="Script" uid="uid://c0vp04olwm3ag" path="res://key.gd" id="1_4dukr"]
+[ext_resource type="AudioStream" uid="uid://b6dc0ljtfxgex" path="res://startup.MP3" id="2_jn0h8"]
+[ext_resource type="ArrayMesh" uid="uid://cjrrmx6fbik3f" path="res://key.obj" id="2_tqwrs"]
+[ext_resource type="AudioStream" uid="uid://c4talxyy5f7g5" path="res://unlocked.MP3" id="3_l7ddw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0yg6"]
+albedo_color = Color(0.46666667, 1, 1, 1)
+metallic = 1.0
+roughness = 0.4
+emission = Color(1.4439225e-06, 0.641754, 0.6821933, 1)
+emission_energy_multiplier = 12.86
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kguk"]
+radius = 0.25683594
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8y70"]
+albedo_color = Color(0, 1, 1, 1)
+metallic = 1.0
+roughness = 0.17
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 12.48
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k4l57"]
+
+[node name="Key" type="Area3D"]
+transform = Transform3D(7.885, 0, 0, 0, 7.885, 0, 0, 0, 7.885, 2.9826663, 3.653288, 0)
+script = ExtResource("1_4dukr")
+key_id = "key_b"
+spawn_sound = ExtResource("2_jn0h8")
+pickup_sound = ExtResource("3_l7ddw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_p0yg6")
+mesh = ExtResource("2_tqwrs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-6.325038e-08, -1.0541759, 0, 1.447, -4.6079492e-08, 0, 0, 0, 1.447, -0.45301276, 0, 0)
+shape = SubResource("CapsuleShape3D_4kguk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.239, 0, 0, 0, 9.209308, 0, 0, 0, 0.239, 0, 10.268911, 0)
+material_override = SubResource("StandardMaterial3D_d8y70")
+mesh = SubResource("CylinderMesh_k4l57")

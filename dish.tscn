@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://omlen04a4vh0"]
+
+[ext_resource type="ArrayMesh" uid="uid://xvmmjvheyomn" path="res://dishv3.obj" id="1_nhp53"]
+[ext_resource type="Script" uid="uid://bmrqbmonjl8ge" path="res://rotate.gd" id="2_w6amf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhp53"]
+shading_mode = 0
+albedo_color = Color(0.7538449, 0, 0.22977814, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(11.375, 0, 0, 0, 11.375, 0, 0, 0, 11.375, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_nhp53")
+mesh = ExtResource("1_nhp53")
+script = ExtResource("2_w6amf")

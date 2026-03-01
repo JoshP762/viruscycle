@@ -61,6 +61,8 @@ var _current_lean: float = 0.0
 var _current_pitch: float = 0.0
 var _prev_speed: float = 0.0
 
+var _launched: bool = false
+
 func _ready() -> void:
 	add_to_group("player")
 	if mesh_node:
@@ -106,12 +108,17 @@ func _physics_process(delta: float) -> void:
 	_apply_lean_and_surface_align(delta)
 	_update_trail()
 	
-
+func launch(force: float) -> void:
+	velocity.y = force
+	_launched = true
+	
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		_launched = false
 	else:
-		velocity.y = -10
+		if not _launched:
+			velocity.y = -10
 
 func _get_forward() -> Vector3:
 	match forward_axis:

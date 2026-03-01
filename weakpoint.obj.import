@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://gwncwgc7gpf2"
+path="res://.godot/imported/weakpoint.obj-c4520768286d54c4cd7c50ed73b0797d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/weakpoint.obj-c4520768286d54c4cd7c50ed73b0797d.mesh"]
+
+source_file="res://weakpoint.obj"
+dest_files=["res://.godot/imported/weakpoint.obj-c4520768286d54c4cd7c50ed73b0797d.mesh", "res://.godot/imported/weakpoint.obj-c4520768286d54c4cd7c50ed73b0797d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2lq10rt36w24"]
+
+[ext_resource type="Script" uid="uid://8475x2evbga7" path="res://jumppad.gd" id="1_laror"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_laror"]
+albedo_color = Color(0, 0.48611492, 0.32297552, 1)
+roughness = 0.22
+
+[sub_resource type="QuadMesh" id="QuadMesh_ai465"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s47m4"]
+size = Vector3(1, 0.90808105, 1)
+
+[node name="Jumppad" type="Area3D"]
+transform = Transform3D(11.5, 0, 0, 0, 11.5, 0, 0, 0, 11.5, 0, 0, 0)
+script = ExtResource("1_laror")
+launch_force = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_laror")
+mesh = SubResource("QuadMesh_ai465")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.32803223, 0)
+shape = SubResource("BoxShape3D_s47m4")

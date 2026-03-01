@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp7sroxbd33a"]
+[gd_scene load_steps=8 format=3 uid="uid://cp7sroxbd33a"]
 
 [ext_resource type="Script" uid="uid://c0vp04olwm3ag" path="res://key.gd" id="1_krfvd"]
 [ext_resource type="ArrayMesh" uid="uid://cjrrmx6fbik3f" path="res://key.obj" id="3_k4l57"]
+[ext_resource type="AudioStream" uid="uid://c4talxyy5f7g5" path="res://unlocked.MP3" id="3_wp5jh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0yg6"]
 albedo_color = Color(0.46666667, 1, 1, 1)
@@ -26,6 +27,7 @@ emission_energy_multiplier = 12.48
 [node name="Key" type="Area3D"]
 transform = Transform3D(7.885, 0, 0, 0, 7.885, 0, 0, 0, 7.885, 2.9826663, 3.653288, 0)
 script = ExtResource("1_krfvd")
+pickup_sound = ExtResource("3_wp5jh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)

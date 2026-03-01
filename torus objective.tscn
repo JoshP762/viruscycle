@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://635hl8k3v3be"]
+
+[ext_resource type="Script" uid="uid://djmgw56wkx5hx" path="res://torus_objective.gd" id="1_mhr0f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exwk6"]
+shading_mode = 0
+albedo_color = Color(0.9254902, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ilau4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evhmy"]
+albedo_color = Color(0.9254902, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_veufb"]
+inner_radius = 1.272
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xewb"]
+albedo_color = Color(0.9254902, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mim1m"]
+albedo_color = Color(0.9254902, 0, 0, 1)
+
+[node name="TorusObjective" type="StaticBody3D"]
+script = ExtResource("1_mhr0f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, -1.5802002, 0.06982422, 0.10070801)
+material_override = SubResource("StandardMaterial3D_exwk6")
+mesh = SubResource("SphereMesh_ilau4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(878.85, 0, 0, 0, 878.85, 0, 0, 0, 878.85, -1.5802002, 1.9277344, 0.10070801)
+material_override = SubResource("StandardMaterial3D_evhmy")
+mesh = SubResource("TorusMesh_veufb")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(951.235, 0, 0, 0, 951.235, 0, 0, 0, 951.235, -1.5802002, 230.71005, 0.10070801)
+material_override = SubResource("StandardMaterial3D_6xewb")
+mesh = SubResource("TorusMesh_veufb")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(990.905, 0, 0, 0, 990.905, 0, 0, 0, 990.905, -1.5802002, 471.63562, 0.10070801)
+material_override = SubResource("StandardMaterial3D_mim1m")
+mesh = SubResource("TorusMesh_veufb")
